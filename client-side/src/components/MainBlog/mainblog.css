@@ -1,0 +1,49 @@
+@import "https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap";
+
+.main_blog{
+    font-family: 'Ubuntu', sans-serif;
+    background: #f6f6f6;
+}
+
+.mainblog_body{
+    margin: 30px 0 0 0;
+    position: relative;
+}
+
+.title{
+    font-size: 4rem;
+    text-align: center;
+}
+
+.dateMain{
+    font-size: 0.8em;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.image{
+    width: 100%;
+    height: 90vh;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.description{
+    line-height: 35px;
+    font-size: 1.5em;
+}
+
+#btn1{
+    position: absolute;
+    top: 6.5%;
+    right: 12%;
+    color:rgba(7, 255, 19, 0.808);
+}
+
+#btn2{
+    position: absolute;
+    top: 6.5%;
+    right: 0%;
+    color: rgba(199, 25, 25, 0.781);
+}
