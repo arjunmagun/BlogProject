@@ -1,0 +1,52 @@
+.main_register {
+  font-family: "Ubuntu", sans-serif;
+  background: #f6f6f6;
+}
+
+#form {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  margin: auto;
+  background: #f6f6f6;
+}
+
+.title_register {
+  font-size: 4em;
+  margin: 30px auto;
+}
+
+.username {
+  height: 50px;
+  font-size: 50px;
+  border: none;
+  outline: none;
+  margin: 20px 0;
+  background: #f6f6f6;
+}
+
+.emailInput {
+  height: 50px;
+  font-size: 50px;
+  border: none;
+  outline: none;
+  margin: 20px 0;
+  background: #f6f6f6;
+}
+
+.password {
+  height: 50px;
+  font-size: 50px;
+  border: none;
+  outline: none;
+  margin: 20px 0;
+  background: #f6f6f6;
+}
+
+#registerBtn {
+  background-color: "red";
+  padding: 30px;
+  border-radius: 50px;
+  margin: 20px 0 20px 0;
+  font-size: 30px;
+}

@@ -1,20 +1,22 @@
-import React, { useContext } from "react";
-import './home.css';
+import React, { useContext } from 'react';
 import Navbar from "../Navbar/Navbar";
 import Container from '@material-ui/core/Container';
 import { Button } from "@material-ui/core";
 import { BlogContext } from "../../Context/blogContext";
-import { UserContext } from "../../Context/UserContext";
+import { UserContext } from '../../Context/UserContext';
+import "./userblogs.css";
 
-function Home() {
+export default function UserBlogs() {
     const [blogs, setBlogs] = useContext(BlogContext);
-    const [userData, setUserData] = useContext(UserContext);
-
+    const [userData,serUserData] = useContext(UserContext);
+    const UserBlogs = blogs.filter(blog=> blog.createdBy.id === userData.id) || null
+    console.log(UserBlogs);
     return (
-        <div className='main_home'>
+        <div className="userBlogs-main">
             <Navbar />
             <Container fixed>
-                {blogs.map((blog, index) => {
+            <h1>Your Blogs</h1>
+                {UserBlogs.map((blog, index) => {
                     return (
                         <div className='mycard'>
                         <img className='mycard_img' alt="random" src={blog.imageUrl} />
@@ -28,13 +30,7 @@ function Home() {
                                     {blog.date.substring(0, 10)}
                                 </p>
                                 </div>
-                                <Button 
-                                    id='mycard_btn' 
-                                    variant="outlined" 
-                                    href={userData ? `/${blog._id}` : '/users/login'}
-                                >
-                                    Read More...
-                                </Button>
+                                <Button id='mycard_btn' variant="outlined" href={`/${blog._id}`}>Read More...</Button>
                             </div>
                         </div>
                     )
@@ -43,5 +39,3 @@ function Home() {
         </div>
     )
 }
-
-export default Home;

@@ -1,0 +1,79 @@
+.main_login {
+  font-family: "Ubuntu", sans-serif;
+  background: #f6f6f6;
+}
+
+#form {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  margin: auto;
+  background: #f6f6f6;
+}
+
+.title_login {
+  font-size: 4em;
+  margin: 30px auto;
+}
+
+.username {
+  height: 50px;
+  font-size: 50px;
+  border: none;
+  outline: none;
+  margin: 20px 0;
+  background: #f6f6f6;
+}
+
+.emailInput {
+  height: 50px;
+  font-size: 50px;
+  border: none;
+  outline: none;
+  margin: 20px 0;
+  background: #f6f6f6;
+}
+
+.password {
+  height: 50px;
+  font-size: 50px;
+  border: none;
+  outline: none;
+  margin: 20px 0;
+  background: #f6f6f6;
+}
+
+#loginBtn {
+  padding: 30px;
+  border-radius: 50px;
+  margin: 20px 0 20px 0;
+  font-size: 30px;
+}
+
+@media only screen and (max-width: 430px) {
+  .title_login {
+    font-size: 4em;
+    margin: 30px auto;
+  }
+
+  .username {
+    height: 40px;
+    font-size: 3em;
+  }
+
+  .emailInput {
+    height: 40px;
+    font-size: 3em;
+  }
+
+  .password {
+    height: 45px;
+    font-size: 3em;
+  }
+
+  #loginBtn {
+    padding: 20px;
+    margin: 15px 0 15px 0;
+    font-size: 1.5em;
+  }
+}

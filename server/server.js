@@ -14,21 +14,6 @@ const userRoutes = require("./routes/user");
 const Blog = require("./models/blogs");
 const User = require("./models/user");
 
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.use(session({
-    secret: "thisisthekeyofexresssession",
-    resave: false,
-    saveUninitialized: false
-}));
-
-app.use(cookieParser("thisisthekeyofexresssession"));
-
-mongoose.connect(process.env.DATABASEURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(()=>console.log("Database is connected"));
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
@@ -38,8 +23,31 @@ app.use(cors({
     credentials: true
 }));
 
+app.use(cookieParser(process.env.SECRET_KEY));
+app.use(session({
+    secret: process.env.SECRET_KEY,
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+mongoose.connect(process.env.DATABASEURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+}).then(()=>console.log("Database is connected"));
+
 require('./Config/passportConfig')(passport);
 
+app.get("/userData", (req, res)=>{
+    if(!req.user){
+        res.send("Nothing")
+    } else{
+        res.send(req.user)
+    }
+})
 app.use("/", indexRoutes);
 app.use("/users", userRoutes);
 

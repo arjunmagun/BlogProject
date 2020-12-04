@@ -16,6 +16,13 @@ const blogSchema = mongoose.Schema({
     imageUrl: {
         type: String,
         required: true
+    },
+    createdBy:{
+        id:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        username: String
     }
 });
 

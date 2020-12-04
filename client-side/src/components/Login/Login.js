@@ -4,12 +4,17 @@ import { Button, FormControl } from "@material-ui/core";
 import {Container} from "react-bootstrap";
 import Navbar from "../Navbar/Navbar";
 import { UserContext } from '../../Context/UserContext';
+import { useHistory } from "react-router";
+
+import './Login.css';
+
 
 function Login() {
     const [logusername, setlogUsername] = useState("");
     const [logemail, setlogEmail] = useState("");
     const [logpassword, setlogPassword] = useState("");
-    const [userData, setUserData] = useContext(UserContext)
+    const [userData, setUserData] = useContext(UserContext);
+    const history = useHistory();
 
     function handleUsername(event){
         setlogUsername(event.target.value);
@@ -23,10 +28,10 @@ function Login() {
         setlogPassword(event.target.value)
     }
 
-    function handleChange(event){
+    async function handleChange(event){
         event.preventDefault();
 
-        axios({
+        await axios({
             method: "POST",
             data:{
                 username: logusername,
@@ -35,16 +40,16 @@ function Login() {
             },
             withCredentials: true,
             url: "http://localhost:5000/users/login"
-        }).then(res=> localStorage.setItem("userData", res.data));
+        }).then(res=> setUserData(res.data));
+
+        history.push("/")
     }
 
     return (
-        <div>
+        <div className='main_login'>
             <Navbar />
-           <Container>
-           {userData ? <h1>{userData.username}</h1> : <h1>No user found</h1>}
-           
-            <h1 className='title_create'>Login</h1>
+            <Container>
+            <h1 className='title_login'>Login</h1>
             <FormControl id='form'>
                 <input
                     className='username'
@@ -70,8 +75,7 @@ function Login() {
                     name="password"
                     onChange={handlePassword}
                  />
-
-                <Button type="submit" onClick={handleChange}>Register</Button>
+                <Button id='loginBtn' type="submit" onClick={handleChange}>Login</Button>
             </FormControl>
         </Container>
         </div>

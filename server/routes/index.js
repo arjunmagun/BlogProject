@@ -2,14 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Blog = require("../models/blogs");
 
-const isLoggedIn = (req, res, next)=>{
-    if(req.isAuthenticated()){
-        return next()
-    } else{
-        console.log("You must be logged in or registered");
-    }
-}
-
 router.get("/", (req, res)=>{
     Blog.find({}, (err, results)=>{
         if(err){
@@ -20,16 +12,18 @@ router.get("/", (req, res)=>{
     });
 });
 
-router.post("/create",isLoggedIn, (req, res)=>{
+router.post("/create", (req, res)=>{
     const title = req.body.title;
     const description = req.body.description;
     const imageUrl = req.body.imageUrl;
     const date = req.body.date;
+    const createdBy = req.body.createdBy;
     const newBlog = new Blog({
         title,
         description,
         date,
-        imageUrl
+        imageUrl,
+        createdBy
     });
     newBlog.save()
         .then(()=> res.json("Added new blog to the database"))
@@ -42,7 +36,6 @@ router.get("/:id", (req, res)=>{
             res.json(err)
         } else{
             res.json(result)
-            console.log(result);
         }
     })
 });

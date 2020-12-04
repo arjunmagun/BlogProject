@@ -4,12 +4,16 @@ import { Button, FormControl } from "@material-ui/core";
 import {Container} from "react-bootstrap";
 import Navbar from "../Navbar/Navbar";
 import { UserContext } from '../../Context/UserContext';
+import { useHistory } from "react-router-dom";
+
+import './Register.css';
+
 
 function Register() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [userdata, setUserdata] = useContext(UserContext)
+    const history = useHistory();
 
     function handleUsername(event){
         setUsername(event.target.value);
@@ -23,10 +27,10 @@ function Register() {
         setPassword(event.target.value)
     }
 
-    function handleChange(event){
+    async function handleChange(event){
         event.preventDefault();
 
-        axios({
+        await axios({
             method: "POST",
             data:{
                 username,
@@ -35,17 +39,18 @@ function Register() {
             },
             withCredentials: true,
             url: "http://localhost:5000/users/register"
-        }).then((res)=> console.log(res))
+        }).then((res)=> console.log(res));
+
+        history.push("/users/login")
+        // window.location = "/users/login"
     }
     
 
     return (
-        <div>
+        <div className='main_register'>
             <Navbar />
            <Container>
-           
-           <h1>{userdata.username}</h1>
-            <h1 className='title_create'>Register</h1>
+            <h1 className='title_register'>Register</h1>
             <FormControl id='form'>
                 <input
                     className='username'
@@ -65,14 +70,14 @@ function Register() {
                  />
                 <input 
                     className="password"
-                    placeholder="password"
+                    placeholder="Password"
                     type="password"
                     value={password}
                     name="password"
                     onChange={handlePassword}
                  />
 
-                <Button type="submit" onClick={handleChange}>Register</Button>
+                <Button id='registerBtn' type="submit" onClick={handleChange}>Register</Button>
             </FormControl>
         </Container>
         </div>

@@ -1,65 +1,110 @@
 @import "https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap";
 
-.main_create{
-    font-family: 'Ubuntu', sans-serif;
-    background: #f6f6f6;
+.main_create {
+  font-family: "Ubuntu", sans-serif;
+  background: #f6f6f6;
 }
 
-#form{
-    width: 100%;
-    height: 100vh;
-    position: relative;
-    margin: auto;
-    background: #f6f6f6;
+#form {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  margin: auto;
+  background: #f6f6f6;
 }
 
-.title_create{
-    font-size: 4em;
-    margin: 30px auto;
+.title_create {
+  font-size: 4em;
+  margin: 30px auto;
 }
 
-.titleInput{
-    /* width: 700px; */
-    height: 80px;
-    font-size: 80px;
-    border: none;
-    outline: none;
-    margin: 20px 0;
-    background: #f6f6f6;
+.titleInput {
+  /* width: 700px; */
+  height: 80px;
+  font-size: 80px;
+  border: none;
+  outline: none;
+  margin: 20px 0;
+  background: #f6f6f6;
 }
 
+.descInput {
+  height: 200px;
+  font-size: 50px;
+  border: none;
+  outline: none;
+  margin: 20px 0;
+  background: #f6f6f6;
+}
 
-.descInput{
-    height: 200px;
+.imageInput {
+  font-size: 40px;
+  border: none;
+  width: 500px;
+  outline: none;
+  margin: 20px 0;
+  background: #f6f6f6;
+}
+
+#dateSelector {
+  width: 500px;
+  height: 60px;
+  font-size: 1.5em;
+  border: none;
+  background: #f6f6f6;
+}
+
+#btn_create {
+  width: 100px;
+  background: rgb(45, 100, 252);
+  color: #fff;
+  position: absolute;
+  top: -12%;
+  right: 5%;
+}
+
+@media only screen and (max-width: 1200px) {
+  #btn_create {
+    top: -2%;
+    right: 0;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .title_create {
+    font-size: 3em;
+  }
+
+  .titleInput {
+    height: 50px;
     font-size: 50px;
-    border: none;
-    outline: none;
-    margin: 20px 0;
-    background: #f6f6f6;
-}
+  }
 
-.imageInput{
+  .descInput {
+    height: 180px;
     font-size: 40px;
-    border: none;
-    width: 500px;
-    outline: none;
-    margin: 20px 0;
-    background: #f6f6f6;
+  }
+
+  .imageInput {
+    font-size: 40px;
+    width: 50%;
+  }
+
+  #dateSelector {
+    width: 50%;
+  }
+
+  #btn_create {
+    top: -10%;
+    right: 0;
+  }
 }
 
-#dateSelector{
-    width: 500px;
-    height: 60px;
-    font-size: 1.5em;
-    border: none;
-    background: #f6f6f6;
-}
+@media only screen and (max-width: 375px) {
+  .title_create {
+    font-size: 2.5em;
+  }
 
-#btn_create{
-    width: 100px;
-    background: rgb(45, 100, 252);
-    color: #fff;
-    position: absolute;
-    top: -12%;
-    right: 5%;
+  #btn_create {
+    right: 0;
+  }
 }

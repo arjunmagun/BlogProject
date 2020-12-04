@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-// const passportLocalMongoose = require('passport-local-mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
 
 const userSchema = new mongoose.Schema({
     username: String,
@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     password: String
 });
 
-// userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose);
 
 // // passport-local-mongoose
 

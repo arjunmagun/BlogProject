@@ -4,12 +4,11 @@ const User = require("../models/user");
 const passport = require("passport");
 const bcrypt = require('bcryptjs');
 
-
-router.get("/register", (req, res)=>{
+router.get("/logged", (req, res)=>{
     if(!req.user){
-        console.log("no user logged in");
+        res.status(404).send("no user logged in");
     } else{
-        console.log("user logged in");
+        res.status(200).send(req.user);
     }
 })
 
@@ -20,7 +19,7 @@ router.post("/register", (req, res)=>{
     
     User.findOne({username: username, email: email}, async (err, user)=>{
         if (err) throw err;
-        if (user) res.send("User already Exist");
+        if (user) res.status(404).send("User already Exist");
         else {
             const hashedPassword = await bcrypt.hash(password, 12);
             const newuser = new User({
@@ -37,16 +36,20 @@ router.post("/register", (req, res)=>{
 router.post('/login', (req, res, next)=>{
     passport.authenticate("local", (err, user, result)=>{
         if(err) throw err;
-        if(!user) res.send("No user exists!")
+        if(!user) res.status(409).send("No user exists")
         else{
             req.logIn(user, (err)=>{
                 if(err) throw err;
-                res.send(req.user);
+                res.send({
+                    username: req.user.username,
+                    email: req.user.email,
+                    id: req.user._id
+                })
+                console.log(req.user);
             })
         }
-    })(req, res, next);
+    })(req, res, next)
 })
-
 
 router.get('/logout', (req, res)=>{
     req.logout();

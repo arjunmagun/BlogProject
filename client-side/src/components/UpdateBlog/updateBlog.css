@@ -1,0 +1,45 @@
+@import "https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap";
+
+.update-main {
+  font-family: "Ubuntu", sans-serif;
+  background: #f6f6f6;
+}
+
+#update-form {
+  width: 100%;
+  font-size: 1.5em;
+}
+
+#update-form input {
+  font-size: 1.5em;
+  margin: 20px 0;
+  border: none;
+  outline: none;
+  background: #f6f6f6;
+}
+
+#update-form textarea {
+  height: 100%;
+  width: 100%;
+  font-size: 1.5em;
+  background: #f6f6f6;
+  margin: 20px 0;
+  border: none;
+}
+
+#btn-update {
+  width: 100%;
+  background: #acacac;
+  color: #000000;
+}
+
+@media only screen and (max-width: 575px) {
+  #update-form input {
+    font-size: 1em;
+  }
+
+  #update-form textarea {
+    font-size: 1em;
+    height: 50%;
+  }
+}

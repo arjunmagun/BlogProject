@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import "@material-ui/core";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -8,13 +8,14 @@ import swal from "sweetalert";
 import { Button, FormControl } from "@material-ui/core";
 import {Container} from "react-bootstrap";
 import './createblog.css';
-
+import { UserContext } from '../../Context/UserContext';
 
 function CreateBlog(){
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const [date, setDate] = useState(new Date());
+    const [userData, setUserData] = useContext(UserContext)
         
     function handletitle(event){
         setTitle(event.target.value);
@@ -22,7 +23,6 @@ function CreateBlog(){
     
     function handledescription(event){
         setDescription(event.target.value);
-        console.log(description);
     }
     function handleimage(event){
         setImageUrl(event.target.value);
@@ -37,7 +37,8 @@ function CreateBlog(){
             title: title,
             description: description,
             imageUrl: imageUrl,
-            date: date
+            date: date,
+            createdBy: userData
         }
         axios.post("http://localhost:5000/create", newBlog) 
         .then(res=>console.log(res.data))

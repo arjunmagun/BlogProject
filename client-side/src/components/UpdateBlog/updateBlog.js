@@ -1,97 +1,60 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import DatePicker from "react-datepicker";
 import Navbar from "../Navbar/Navbar";
 import {Container} from 'react-bootstrap';
 import { Button, FormControl, Input } from "@material-ui/core";
+import "./updateBlog.css";
 
 function UpdateBlog(props) {
-    console.log(props);
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [date, setDate] = useState(new Date());
-    const [imageUrl, setImageUrl] = useState("");
-    const [oneblog, setBlogs] = useState([]);
+    const [oneblog, setBlog] = useState([]);
     let id = props.match.params.id
 
-    useEffect(()=>{
-    axios.get(`http://localhost:5000/${id}`)
-        .then(res=>setBlogs([res.data]))
+    useEffect(async ()=>{
+    await axios.get(`http://localhost:5000/${id}`)
+        .then(res=>setBlog(res.data))
     }, []);
-    console.log(oneblog);
     
-    function handletitle(event){
-        setTitle(event.target.value);
-    };
-    
-    function handledescription(event){
-        setDescription(event.target.value);
-    };
-    function handledate(date){
-        setDate(date);
-    };
-
-    function handleimage(event){
-        setImageUrl(event.target.value);
-    };
-    
-    function handleChange(event, props){
+    async function handleChange(event){
         event.preventDefault();
-        const editedBlog = {
-            title: title,
-            description: description,
-            date: date,
-            imageUrl: imageUrl
-        };
-        axios.post(`http://localhost:5000/${id}/update`, editedBlog) 
-        .then(res=>console.log(res.data));
+        await axios({
+            method: "POST",
+            data: oneblog,
+            url: `http://localhost:5000/${id}/update`
+        }).then(res=>console.log(res.data));
         window.location = `/${id}`
-        // console.log(editedBlog);
     }
     
     return (
-        <div>
+        <div className="update-main">
         <Navbar/>
         <Container>
-        {oneblog.map((blog)=>
-        <div>
-            <h1>{blog.title}</h1>
-            <img alt='blogImage' src={blog.imageUrl} />
-            <p>{blog.description}</p>
-            <h3>{blog.date}</h3>
-        </div>
-        )}
-        </Container>
-
-        
-        <Container>
-        <h1>Update blogs here!</h1>
-        <FormControl justify="center" alignItems="center">    
-                <Input
-                id="title"
-                placeholder="Title" 
-                value={title} 
-                name="title" 
-                onChange={handletitle} />
-                
-                <Input 
-                id="description"
-                placeholder="Description" 
-                value={description} 
-                name="description"
-                onChange={handledescription} />
-
-                <Input 
-                    placeholder="Image URL" 
-                    value={imageUrl}
-                    name="imageurl"
-                    onChange={handleimage} /> 
-                <DatePicker 
-                selected = {date} 
-                onChange={handledate}
+            <h1>Update blogs here!</h1>
+            <FormControl id='update-form' justify="center" alignItems="center">    
+                <input
+                    className="update-title"
+                    placeholder="Title" 
+                    value={oneblog.title} 
+                    name="title" 
+                    onChange={e=> setBlog({...oneblog, title: e.target.value})} 
                 />
+
+                <input 
+                    className='imageUrl_update'
+                    placeholder="Image URL" 
+                    value={oneblog.imageUrl}
+                    name="imageurl"
+                    onChange={e=> setBlog({...oneblog, imageUrl: e.target.value})} 
+                /> 
                 
-                <Button color="primary" variant="contained" onClick={handleChange}>Edit Blog!</Button>
+                <textarea 
+                    className="description_update"
+                    placeholder="Description" 
+                    value={oneblog.description} 
+                    rows="20"
+                    name="description"
+                    onChange={e=> setBlog({...oneblog, description: e.target.value})} 
+                />
+                <Button id="btn-update" color="primary" variant="contained" onClick={handleChange}>Edit Blog!</Button>
             </FormControl>
         </Container>
         </div>
