@@ -1,1 +1,1 @@
-web: node app.js
+web:node client-side/src/App.js
