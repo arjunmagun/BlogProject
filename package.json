@@ -4,6 +4,10 @@
   "description": "",
   "main": "./server/server.js",
   "scripts": {
+    "start": "node server/server.js",
+    "backend" : "nodemon server/server.js",
+    "frontend": "npm run start --prefix client-side",
+    "dev" : "concurrently \"npm run backend\" \"npm run start --prefix client-side\"" ,
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client-side && npm run build --prefix client-side"
   },
   "author": "",
