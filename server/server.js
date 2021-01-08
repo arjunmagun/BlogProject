@@ -53,9 +53,9 @@ app.use("/users", userRoutes);
 
 if( process.env.NODE_ENV === "production" ){
     app.use(express.static("client-side/build"));
-
+    const path = require("path");
     app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, "../client-side", "build", "index.html"));
+        res.sendFile(path.resolve(__dirname, "client-side", "build", "index.html"));
     })
 }
 
