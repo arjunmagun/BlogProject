@@ -5,13 +5,13 @@
   "main": "./server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild" : "NPM_CONFIG_PRODUCTION=false npm install --prefix client-side && npm run build --prefix client-side"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client-side && npm run build --prefix client-side"
   },
   "author": "",
   "license": "ISC",
   "engines": {
     "node": "14.15.0",
-    "npm" : "6.14.8"
+    "npm": "6.14.8"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
