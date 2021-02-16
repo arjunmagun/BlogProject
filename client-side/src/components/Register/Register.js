@@ -1,9 +1,8 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios';
 import { Button, FormControl } from "@material-ui/core";
 import {Container} from "react-bootstrap";
 import Navbar from "../Navbar/Navbar";
-import { UserContext } from '../../Context/UserContext';
 import { useHistory } from "react-router-dom";
 
 import './Register.css';
@@ -38,7 +37,7 @@ function Register() {
                 password
             },
             withCredentials: true,
-            url: "http://localhost:5000/users/register"
+            url: "https://projectblogwebapp.herokuapp.com/users/register"
         }).then((res)=> console.log(res));
 
         history.push("/users/login")

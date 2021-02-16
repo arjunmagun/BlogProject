@@ -40,7 +40,7 @@ function CreateBlog(){
             date: date,
             createdBy: userData
         }
-        axios.post("http://localhost:5000/create", newBlog) 
+        axios.post("https://projectblogwebapp.herokuapp.com/create", newBlog) 
         .then(res=>console.log(res.data))
         .catch(err=>console.log(err.res));
         window.location = "/"

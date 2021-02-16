@@ -14,12 +14,14 @@ const userRoutes = require("./routes/user");
 const Blog = require("./models/blogs");
 const User = require("./models/user");
 
+const developementUri = "http://localhost:3000";
+const productionUri = "https://arjunblogwebproject.netlify.app";
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: productionUri,
     credentials: true
 }));
 
@@ -37,28 +39,21 @@ mongoose.connect(process.env.DATABASEURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
-}).then(()=>console.log("Database is connected"));
+}).then(() => console.log("Database is connected"));
 
 require('./Config/passportConfig')(passport);
 
-app.get("/userData", (req, res)=>{
-    if(!req.user){
+app.get("/userData", (req, res) => {
+    if (!req.user) {
         res.send("Nothing")
-    } else{
+    } else {
         res.send(req.user)
     }
 })
 app.use("/", indexRoutes);
 app.use("/users", userRoutes);
 
-if( process.env.NODE_ENV === "production" ){
-    app.use(express.static("client-side/build"));
-    const path = require("path");
-    app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, "client-side", "build", "index.html"));
-    })
-}
 
-app.listen(process.env.PORT || 5000, ()=> {
+app.listen(process.env.PORT || 5000, () => {
     console.log("server has started");
 });

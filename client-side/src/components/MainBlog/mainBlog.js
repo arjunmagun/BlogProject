@@ -14,13 +14,16 @@ function MainBlog(props) {
     const [userData, setUserData] = useContext(UserContext);
     let id = props.match.params.id;
 
-    useEffect(async ()=>{
-        await axios.get(`http://localhost:5000/${id}`)
-            .then(res=>setBlog([res.data]))
-        }, []);
+    useEffect(()=>{
+        async function fetchData(){
+            await axios.get(`https://projectblogwebapp.herokuapp.com/${id}`)
+                .then(res=>setBlog([res.data]))
+        }
+        fetchData();
+    }, []);
 
         function deleteBlog(id){
-            axios.delete(`http://localhost:5000/${id}/update`)
+            axios.delete(`https://projectblogwebapp.herokuapp.com/${id}/update`)
             .then(res=>(console.log(res.data)))
 
             setBlog(

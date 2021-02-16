@@ -2,16 +2,19 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import Navbar from "../Navbar/Navbar";
 import {Container} from 'react-bootstrap';
-import { Button, FormControl, Input } from "@material-ui/core";
+import { Button, FormControl } from "@material-ui/core";
 import "./updateBlog.css";
 
 function UpdateBlog(props) {
     const [oneblog, setBlog] = useState([]);
     let id = props.match.params.id
 
-    useEffect(async ()=>{
-    await axios.get(`http://localhost:5000/${id}`)
-        .then(res=>setBlog(res.data))
+    useEffect(()=>{
+        async function fetchData(){
+            await axios.get(`https://projectblogwebapp.herokuapp.com/${id}`)
+                .then(res=>setBlog(res.data))
+        }
+        fetchData();
     }, []);
     
     async function handleChange(event){
@@ -19,7 +22,7 @@ function UpdateBlog(props) {
         await axios({
             method: "POST",
             data: oneblog,
-            url: `http://localhost:5000/${id}/update`
+            url: `https://projectblogwebapp.herokuapp.com/${id}/update`
         }).then(res=>console.log(res.data));
         window.location = `/${id}`
     }
